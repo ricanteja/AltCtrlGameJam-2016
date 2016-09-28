@@ -13,10 +13,6 @@ byte p_meter_anim = 0;
 
 byte button = 0; // simple button
 
-byte color_red = 0;
-byte color_green = 0;
-byte color_blue = 0;
-
 void setup()
 {
   pinMode(9, OUTPUT);
@@ -31,16 +27,13 @@ void loop()
 {
   button = digitalRead(12);
 
-  if(!button)
-    calibrate();
-
   l_meter = analogRead(A0);
   
   if(l_meter > l_meter_max)
     l_meter_max = l_meter;
   if(l_meter < l_meter_min)
     l_meter_min = l_meter;
-  
+    
   l_meter = map(l_meter, l_meter_min, l_meter_max, 0, 255);
   l_meter = 255 - l_meter;
   
@@ -57,16 +50,9 @@ void loop()
     Serial.flush();
   }
 
-  //analogWrite(9, color_red);
-  //analogWrite(10, color_green);
-  //analogWrite(11, color_blue);
+  analogWrite(9, l_meter);
+  digitalWrite(10, button);
+  analogWrite(11, p_meter);
 }
-
-void calibrate()
-{
-
-}
-
-
 
 

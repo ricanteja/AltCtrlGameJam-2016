@@ -16,7 +16,7 @@
 
 struct WaterDrop : public sf::Sprite
 {
-	WaterDrop(sf::Texture& texture, unsigned char power) : sf::Sprite(texture), m_spin(0)
+	WaterDrop(sf::Texture& texture, unsigned char power) : sf::Sprite(texture)
 	{
 		m_life = 30;
 		m_splashed = false;
@@ -51,7 +51,7 @@ int main(int argc, char* argvp[])
 
 	srand(clock.getElapsedTime().asSeconds());
 
-	moony::Serial serial("COM3");
+	Serial serial("COM3");
 
 	if(serial.isConnected())
 		moony::logDebug() << "Serial connection established.";
@@ -204,7 +204,6 @@ int main(int argc, char* argvp[])
 	spr_pipe_body.move(200, 192);
 
 
-
 	sf::Sprite spr_flower(tex_flower);
 	spr_flower.move(88, 160);
 
@@ -336,7 +335,6 @@ int main(int argc, char* argvp[])
 		window.draw(spr_flower);
 		window.draw(spr_face);
 		window.draw(spr_pot);
-		//window.draw(spr_pot_bbox);
 
 		for(int i = 0; i < spr_water.size(); i++)
 		{
